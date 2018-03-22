@@ -54,15 +54,18 @@ namespace HookLineAndSinker
             if (!keyValues.TryGetValue("subject", out string subject))
                 subject = "[HookLineAndSinker] WebHook Received";
 
+            if(string.IsNullOrWhiteSpace(subject))
+                return MissingQueryValue(req, "subject");
+
             var data = await req.Content.ReadAsAsync<JObject>();
 
             await SendEmail(email, subject, data);
 
-            var prefix = $"An EventGrid message was forwarded to {email}";
+            var text = $"An email payload (body) was forwarded to {email}";
 
-            log.Info($"{prefix} (Subject: {subject}, JSON: {data.ToString(Formatting.None)})");
+            log.Info($"{text} (Subject: {subject}, JSON: {data.ToString(Formatting.None)})");
 
-            return req.CreateResponse(HttpStatusCode.OK, prefix);
+            return req.CreateResponse(HttpStatusCode.OK, text);
         }
 
         private static HttpResponseMessage MissingQueryValue(
