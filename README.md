@@ -1,0 +1,1 @@
+A simple WebHook sink that forwards JSON payloads to a query-string-specified email address
