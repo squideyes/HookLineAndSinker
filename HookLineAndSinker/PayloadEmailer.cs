@@ -37,7 +37,7 @@ namespace HookLineAndSinker
     {
         [FunctionName("PayloadEmailer")]
         public static async Task<HttpResponseMessage> Run(TraceWriter log,
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequestMessage req)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequestMessage req)
         {
             if (req.Content.Headers.ContentType.MediaType != "application/json")
             {
