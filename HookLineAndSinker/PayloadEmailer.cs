@@ -61,7 +61,7 @@ namespace HookLineAndSinker
 
             await SendEmail(email, subject, data);
 
-            var text = $"An email payload (body) was forwarded to {email}";
+            var text = $"A JSON payload (body) was forwarded to {email}";
 
             log.Info($"{text} (Subject: {subject}, JSON: {data.ToString(Formatting.None)})");
 
